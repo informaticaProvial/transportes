@@ -1,0 +1,16 @@
+.filter-item {
+    margin-right: 10px; /* Ajusta el valor según tu preferencia */
+    margin-bottom: 10px; /* Ajusta el valor según tu preferencia */
+}
+
+.btn-long {
+    width: 100%; /* Ancho del botón */
+    margin-top: 10px; /* Margen superior para separar del elemento anterior */
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Ajusta el espacio entre la tabla y el paginador según sea necesario */
+  }
+  

@@ -1,0 +1,102 @@
+<br>
+<div class="container">
+  <h3>
+    Ingreso Orden
+  </h3>
+  
+</div>
+
+<br>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+        
+      <form [formGroup]="formGroup"  class="needs-validation" novalidate method="post" style="flex: 1; margin-right: auto">
+            
+            <div class="col-md-5 mb-2">
+                <label for="validationCustom04">Sectores(ruta)</label>
+                <select class="form-control" formControlName="sector_codigo" id="sector_codigo" placeholder="sector_codigo"  required>
+                  <option value="" disabled selected>Selecciona un sector</option>
+                  <option *ngFor="let opcion of opcionesSector" [value]="opcion">{{ opcion }}</option>
+                </select>
+              </div>
+
+
+            <div class="col-md-5 mb-2">
+                <label for="validationCustom04">Unidades libres</label>
+                <select class="form-control" formControlName="unidad_num" id="unidad_num" placeholder="unidad_num"  required>
+                  <option value="" disabled selected>Selecciona una unidad</option>
+                  <option *ngFor="let u of unidades" [value]="u">{{ u.UNIDAD_NUM }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="validationCustom04">Brigada 1(Piloto)</label>
+                <select class="form-control" formControlName="unidad_brigada1" id="unidad_brigada1" placeholder="unidad_brigada1"  required>
+                  <option value="" disabled selected>Selecciona un piloto</option>
+                  <option *ngFor="let b of brigadas" [value]="b">{{ b.BRIGADA_NOM }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="validationCustom04">Brigada 2(Copiloto)</label>
+                <select class="form-control" formControlName="unidad_brigada2" id="unidad_brigada2" placeholder="unidad_brigada2">
+                  <option value="" disabled selected>Selecciona un copiloto</option>
+                  <option *ngFor="let b of brigadas" [value]="b">{{ b.BRIGADA_NOM }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="dia_turno">Día de turno</label>
+                <input type="date" class="form-control" formControlName="dia_turno" id="dia_turno" required>
+              </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="hora_inicio">Hora inicio</label>
+                <input type="time" class="form-control" formControlName="hora_inicio" id="hora_inicio" required>
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="hora_final">Hora final</label>
+                <input type="time" class="form-control" formControlName="hora_final" id="hora_final">
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="hora_inicio">Odometro</label>
+                <input type="number" class="form-control" formControlName="odo_ant" id="odo_ant" required>
+            </div>
+
+            <div class="col-md-5 mb-2">
+                <label for="hora_final">Combustible</label>
+                <input type="number" class="form-control" formControlName="odo_nue" id="odo_nue" required>
+            </div>
+             
+        <div class="col-md-5 mb-3">
+            <button class="btn btn-primary" (click)="postForm(formGroup.value)">Agregar</button>
+        
+        </div>
+        
+    </form>
+
+    
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+
+</div>

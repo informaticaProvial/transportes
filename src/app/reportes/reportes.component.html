@@ -1,0 +1,120 @@
+<br>
+<div class="container">
+  <h3>
+    Reporte Unidades
+ </h3>
+</div>
+
+<div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;">
+        
+    <div class="form-group filter-item">
+      <label>Filtrar por situación</label>
+      <select class="form-control" id="filtroSituacion" [(ngModel)]="filtros.filtroSituacion" (change)="filtrarReportes()">
+        <option value="" disabled selected></option>
+        <option *ngFor="let option of situacionActualOptions" [value]="option.TREPORTE_DES">{{ option.TREPORTE_DES }}</option>
+      </select>
+
+      <label>Filtrar por sector</label>
+      <select class="form-control" id="filtroSector" [(ngModel)]="filtros.filtroSector" (change)="filtrarReportes()">
+          <option value="" disabled selected></option>
+          <option *ngFor="let opcion of opcionesSector" [value]="opcion">{{ opcion }}</option>
+      </select>
+    </div>
+
+  
+    <div class="form-group filter-item"  style="flex: 1;">
+      <label>Filtrar por patrulla</label>
+      <input type="text" class="form-control" id="filtroPatrulla"  [(ngModel)]="filtros.filtroPatrulla" name="filtroPatrulla" (change)="filtrarReportes()">
+
+      <label>Filtrar por tramo kls</label>
+      <input type="text" class="form-control" id="filtroKl"  [(ngModel)]="filtros.filtroKl" name="filtroKl" (change)="filtrarReportes()">
+    </div>
+
+    <div class="form-group filter-item"  style="flex: 1;">
+      <label for="fechaInicio">Fecha de inicio:</label>
+        <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="filtros.fechaInicio" name="fechaInicio" (change)="filtrarReportes()">
+
+        <label for="fechaFin">Fecha de fin:</label>
+        <input type="date" class="form-control" id="fechaFin" [(ngModel)]="filtros.fechaFin" name="fechaFin" (change)="filtrarReportes()">
+    </div>
+
+    <div class="form-group filter-item" >
+      <label></label>
+
+      <button class="btn btn-primary btn-long" (click)="filtroReportesOperativos()">
+        <i class="bi bi-search"></i> Filtrar
+      </button>
+      <button class="btn btn-success  btn-long" (click)="generarYDescargarPDF()">
+        <i class="bi bi-cloud-download"></i> Descargar
+      </button>
+
+      <button class="btn btn-secondary btn-long" (click)="limpiarFiltros()">
+        <i class="bi bi-x-circle"></i> Limpiar Filtro
+        </button>
+
+  </div>
+</div>
+
+<br><br>
+
+    <div class="container" style="display: flex; flex-wrap: wrap;">
+
+      <table class="table" style="flex: 1;">
+        <thead>
+          <tr>
+            <th scope="col">Reporte</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Direcc Sentido</th>
+            <th scope="col">Situación</th>
+            <th scope="col">Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor="let rpt of reportesOperativos | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, id: 'tablaPaginada' }">
+            <td>{{ rpt.REPORTE_NUM }}</td>
+            <td>{{ rpt.FECHA | date:'dd/MM/yyyy'}}</td>
+            <td>{{ rpt.HORA }}</td>
+            <td>{{ rpt.UNIDAD_NUM }}</td>
+            <td>{{ rpt.SECTOR }}</td>
+            <td>{{ rpt.UBICACION }}</td>
+            <td>{{ rpt.DIRECC_SENTIDO }}</td>
+            <td>{{ rpt.REPORTE_TIPO }}</td>
+            <td>{{ rpt.USUARIO }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination-container">
+      <pagination-controls id="tablaPaginada" (pageChange)="pageIndex = $event"></pagination-controls>
+    </div>
+
+    
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+
+<br>
+<br>

@@ -1,0 +1,73 @@
+.pagination button {
+    margin: 2px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  /* Estilos personalizados para el tooltip */
+.custom-tooltip {
+  position: relative;
+}
+
+.custom-tooltip::after {
+  content: attr(title); /* Usar el texto del title como contenido del tooltip */
+  position: absolute;
+  background-color: #333; /* Color de fondo del tooltip */
+  color: white; /* Color del texto del tooltip */
+  padding: 5px 10px; /* Espaciado interno del tooltip */
+  border-radius: 4px; /* Bordes redondeados del tooltip */
+  font-size: 12px; /* Tamaño de fuente del tooltip */
+  white-space: nowrap; /* Evitar el salto de línea */
+  z-index: 1; /* Asegurar que el tooltip esté encima del contenido */
+  opacity: 0; /* Inicialmente ocultar el tooltip */
+  transition: opacity 0.2s; /* Transición de opacidad para suavizar la aparición */
+  pointer-events: none; /* Evitar que el tooltip sea interactivo */
+  top: 100%; /* Posicionar el tooltip debajo del botón */
+  left: 50%; /* Centrar horizontalmente el tooltip */
+  transform: translateX(-50%); /* Alinear el tooltip en el centro del botón */
+}
+
+.custom-tooltip:hover::after {
+  opacity: 1; /* Mostrar el tooltip cuando el botón está en hover */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.card {
+  position: relative;
+  z-index: 10000;
+  width: 50%; /* Ancho de la card */
+  max-height: 80%; /* Altura máxima de la card */
+  overflow-y: auto; /* Agregar scroll si el contenido excede la altura máxima */
+}
+
+/* Agrega margen a la izquierda del segundo botón para separarlo del primer botón */
+.btn-success {
+  margin-left: 1px; /* Puedes ajustar el valor según el espacio deseado */
+}
+
+/* Agrega margen a la izquierda del segundo botón para separarlo del primer botón */
+.btn-outline-danger {
+  margin-left: 2px; /* Puedes ajustar el valor según el espacio deseado */
+}
+
+
+

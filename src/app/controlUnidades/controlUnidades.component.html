@@ -1,0 +1,128 @@
+<br>
+<div class="container">
+  <h3>
+    Situación Actual de Unidades
+  </h3>
+  
+</div>
+
+<br>
+
+<div class="overlay" *ngIf="showCard">
+  <div class="card border border-info shadow-0 mb-3 text-center" >
+
+    <div class="card-body">
+      <textarea [(ngModel)]="unidadInfo" class="form-control" rows="4" placeholder="Ingrese información de la unidad"></textarea>
+    </div>
+    <div class="container">
+      <a class="btn btn-outline-primary" (click)="guardarCard()">Guardar</a>
+      <a class="btn btn-outline-danger" (click)="cancelar()">Cancelar</a>
+    </div>
+  </div> 
+</div>
+
+
+<div class="container">
+  <form class="mb-3">
+      <div class="form-group">
+        <label for="filtro">Filtrar por patrulla:</label>
+        <input type="text" class="form-control" id="filtro" placeholder="Patrulla" [(ngModel)]="filtro" (input)="filtrarReportes()"  name="filtro">
+      </div>
+  </form>
+</div>
+
+<div class="container ">
+  <div style="display: flex; flex-wrap: wrap;">
+
+  <table class="table" style="flex: 5;">
+    <thead>
+      <tr>
+        <th scope="col">Hora</th>
+        <th scope="col">Sector/Ruta/Destino</th>
+        <th scope="col">Direcciones</th>
+        <th scope="col">Km. Ubicación</th>
+        <th scope="col">Patrulla</th>
+        <th scope="col">Situación Actual</th>
+        <th scope="col">Ultimo Reporte</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ro of reportesOperativos | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, id: 'tablaPaginada' }">
+        <td>{{ ro.HORA}}</td>
+        <td>{{ ro.SECTOR }}</td>
+        <td>{{ ro.DIRECC_SENTIDO }}</td>
+        <td>{{ ro.UBICACION }}</td>
+        <td>{{ ro.UNIDAD_NUM}}</td>
+        <td>{{ ro.REPORTE_TIPO }}</td>
+        <td>{{ ro.REPORTE_NUM }}</td>
+
+        <td>
+          <button class="btn btn-primary btn-sm"  (click)="editReporteOperativo(ro)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button type="button" class="btn btn-success btn-sm" (click)="toggleCard(ro.UNIDAD_NUM)">
+            <i class="bi bi-journal-text"></i>
+          </button>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+ 
+
+  <form [formGroup]="formGroup" class="needs-validation" novalidate method="post" style="margin-left: 50px;">
+    <div class="form-row">
+          <div class="col-md-10 mb-3">
+            <label for="patrulla">Patrulla</label>
+            <input type="text" class="form-control" formControlName="patrulla" (ngModelChange)="onNameChanged($event)" id="patrulla" placeholder="Patrulla">
+            <div class="valid-feedback">
+            </div>
+          </div>
+          
+          <div class="col-md-10 mb-3">
+            <label  for="sector">Sector</label>
+            <select class="form-control" formControlName="sector" id="sector" placeholder="Sector"  required>
+              <option value="" disabled selected>Selecciona un sector</option>
+              <option *ngFor="let opcion of opcionesSector" [value]="opcion">{{ opcion }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-10 mb-3">
+            <label  for="ubicacion">Km. Ubicación</label>
+            <input type="text" class="form-control" formControlName="ubicacion" (ngModelChange)="onNameChanged($event)" id="ubicacion" placeholder="Ubicación" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="col-md-10 mb-3">
+            <label for="sentido">Sentido</label>
+            <select class="form-control" formControlName="sentido" id="sentido" placeholder="Sentido"  required>
+              <option value="" disabled selected>Selecciona un sentido</option>
+              <option *ngFor="let opcion of opcionesSentido" [value]="opcion">{{ opcion }}</option>
+            </select>
+            <div class="valid-feedback">
+            </div>
+          </div>
+
+          <div class="col-md-10 mb-3">
+            <label for="situacion">Situación actual</label>
+            <select class="form-control" formControlName="situacion" id="situacion" required>
+              <option value="" disabled selected>Selecciona situación</option>
+              <option *ngFor="let option of situacionActualOptions" [value]="option.TREPORTE_DES">{{ option.TREPORTE_DES }}</option>
+            </select>
+          </div>
+          
+      </div>
+
+          <button class="btn btn-primary" (click)="postForm(formGroup.value)">Guardar</button>
+          
+      </form>
+      </div>
+      <div class="pagination-container" style="text-align: left; margin-top: 10px;">
+        <pagination-controls id="tablaPaginada" (pageChange)="pageIndex = $event"></pagination-controls>
+      </div>
+  </div>
+  
+   

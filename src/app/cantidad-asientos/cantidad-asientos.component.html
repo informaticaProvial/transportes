@@ -1,0 +1,98 @@
+<br>
+<div class="container">
+  <h3>
+    Bitácora
+  </h3>
+</div>
+
+<br>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+        
+      <form [formGroup]="formGroup"  class="needs-validation" novalidate method="post" style="flex: 1; margin-right: 10px;">
+        <div class="form-row">
+            
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom02">Sala</label>
+                <input type="text" class="form-control" formControlName="room_id" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Sala" required>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom02">Fila</label>
+                <input type="text" class="form-control" formControlName="roww" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Fila" required>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom02">Número asiento</label>
+                <input type="text" class="form-control" formControlName="number" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Numero Asiento"  required>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom02">Estado</label>
+                <input type="text" class="form-control" formControlName="status" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Estado" required>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom02">Precio</label>
+                <input type="text" class="form-control" formControlName="price" (ngModelChange)="onNameChanged($event)" id="validationCustom02" placeholder="Precio"  required>
+            </div>
+        </div>
+        <div class="form-row">
+        
+        </div>
+        
+        <button class="btn btn-primary" (click)="postForm(formGroup.value)">Agregar</button>
+
+        
+    </form>
+
+    <table class="table" style="flex: 1;">
+      <thead>
+        <tr>
+          <th scope="col">Sala</th>
+          <th scope="col">Fila</th>
+          <th scope="col">Número Asiento</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let seat of seats">
+          <td>{{ seat.name }}</td>
+          <td>{{ seat.roww }}</td>
+          <td>{{ seat.number }}</td>
+          <td>{{ seat.status }}</td>
+          <td> Q {{ seat.price }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"  (click)="editSeat(seat)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="butto" class="btn btn-danger btn-sm"  (click)="deleteSeat(seat)">
+              <i  class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+
+</div>
+<br>
+<br>
